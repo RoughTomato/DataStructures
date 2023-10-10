@@ -19,7 +19,18 @@ class SinglyLinkedList<T> : ICollection<T> {
 
     private Node<T> head;
 
-    public Int32 Count => throw new NotImplementedException();
+    public Int32 Count { get {
+            Node<T> node = head;
+            Node<T> next = node.next;
+            Int32 count = 0;
+            while (next != null) {
+                node = next;
+                next = node.next;
+                count++;
+            }
+            return count;
+        } 
+    }
 
     public Boolean IsReadOnly => throw new NotImplementedException();
 
@@ -54,14 +65,19 @@ class SinglyLinkedList<T> : ICollection<T> {
     }
 
     public IEnumerator<T> GetEnumerator() {
-        throw new NotImplementedException();
+        Node<T> current = this.head;
+        while (current != null) {
+            yield return current.data;
+            current = current.next;
+        }
     }
+
 
     public Boolean Remove(T item) {
         throw new NotImplementedException();
     }
 
     IEnumerator IEnumerable.GetEnumerator() {
-        throw new NotImplementedException();
+        return GetEnumerator();
     }
 }

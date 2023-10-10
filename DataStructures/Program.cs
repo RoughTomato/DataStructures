@@ -12,4 +12,5 @@ ints.Add(6);
 ints.Add(7);
 ints.Add(8);
 
-Console.WriteLine(ints.GetLast().data);
+Console.WriteLine($"Last {ints.GetLast().data}");
+Console.WriteLine($"Count {ints.Count}");
