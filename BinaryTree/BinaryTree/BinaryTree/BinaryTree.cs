@@ -69,6 +69,29 @@ public class BinaryTree<T> {
     }
 
     /*
-     * TODO: Add auxiliary operations (height, level, size)
+     * TODO: Add auxiliary operations (level, size)
      */
+    public int GetHeight() {
+        if (this.root == null) {
+            return 0;
+        }
+
+        return this.Height(root);
+    }
+
+    private int Height(Node<T> node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftHeight = this.Height(node.left);
+        int rightHeight = this.Height(node.right);
+
+        if (leftHeight > rightHeight) {
+            return leftHeight+1;
+        }
+        else {
+            return rightHeight+1;
+        }
+    }
 }

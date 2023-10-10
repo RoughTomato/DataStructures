@@ -18,5 +18,7 @@ public class Program {
         else {
             Console.WriteLine($"Couldn't find {travel.data}");
         }
+
+        Console.WriteLine($"Height of the tree {bt.GetHeight()}");
     }
 }
