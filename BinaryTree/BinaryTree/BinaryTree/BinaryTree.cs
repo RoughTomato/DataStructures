@@ -7,6 +7,28 @@ public class Node<T> {
 
     public Node(){}
     public Node(T data) => this.data = data;
+
+    public Node<T> FindNodeByValue(Node<T> node, T value) {
+        if (node.data != null && EqualityComparer<T>.Default.Equals(node.data, value)) {
+            return node;
+        }
+        
+        if (node.left != null) {
+            Node<T> ret = node.left.FindNodeByValue(node.left, value);
+            if (ret != null) {
+                return ret;
+            }
+        }
+
+        if (node.right != null) {
+            Node<T> ret = node.right.FindNodeByValue(node.right, value);
+            if (ret != null) {
+                return ret;
+            }
+        }
+
+        return null;
+    }
 }
 
 public class BinaryTree<T> {
@@ -26,4 +48,5 @@ public class BinaryTree<T> {
             node = null; 
         }
     }
+
 }
