@@ -1,5 +1,11 @@
 ﻿
 namespace BinaryTree;
+
+public enum BTNodeDirection {
+    Left,
+    Right
+}
+
 public class Node<T> {
     public T? data;
     public Node<T>? left;
@@ -49,4 +55,20 @@ public class BinaryTree<T> {
         }
     }
 
+    public void InsertAfterValue(T value, Node<T> newNode, BTNodeDirection direction) {
+        Node<T> node = root.FindNodeByValue(this.root, value);
+        
+        if (node != null) {
+            if (BTNodeDirection.Left == direction) {
+                node.left = newNode;
+            }
+            else {
+                node.right = newNode;
+            }
+        }
+    }
+
+    /*
+     * TODO: Add auxiliary operations (height, level, size)
+     */
 }
