@@ -15,13 +15,30 @@ class Node<T> {
     }
 }
 
-class LinkedList<T> : ICollection<T> {
+class SinglyLinkedList<T> : ICollection<T> {
+
+    private Node<T> head;
+
     public Int32 Count => throw new NotImplementedException();
 
     public Boolean IsReadOnly => throw new NotImplementedException();
 
     public void Add(T item) {
-        throw new NotImplementedException();
+        if (head == null) {
+            head = new Node<T>(item);
+        } else {
+            GetLast().next = new Node<T>(item);
+        }
+    }
+
+    public Node<T> GetLast() {
+        Node<T> node = head;
+        Node<T> next = node.next;
+        while (next != null) {
+            node = next;
+            next = node.next;
+        }
+        return node;
     }
 
     public void Clear() {
