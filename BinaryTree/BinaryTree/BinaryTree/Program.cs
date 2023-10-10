@@ -20,5 +20,6 @@ public class Program {
         }
 
         Console.WriteLine($"Height of the tree {bt.GetHeight()}");
+        Console.WriteLine($"Size of the tree {bt.GetSize()}");
     }
 }
