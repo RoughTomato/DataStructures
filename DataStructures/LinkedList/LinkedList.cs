@@ -1,6 +1,4 @@
-﻿using DataStructures.BinaryTree;
-using System.Collections;
-using System.Reflection.Metadata.Ecma335;
+﻿using System.Collections;
 
 namespace DataStructures.LinkedList;
 
@@ -22,6 +20,8 @@ class SinglyLinkedList<T> : ICollection<T> {
     private Node<T> head;
 
     public Int32 Count { get {
+            if (head == null) return 0;
+
             Node<T> node = head;
             Node<T> next = node.next;
             Int32 count = 0;
@@ -63,17 +63,15 @@ class SinglyLinkedList<T> : ICollection<T> {
 
     public T Get(int index) {
         Node<T> node = head;
-        Node<T> next = node.next;
-        Int32 count = 0;
-        while (next != null) {
-            if (count == index) {
-                return node.data;
-            }
-            node = next;
-            next = node.next;
-            count++;
+
+        if (index > this.Count || index < 0) {
+            throw new IndexOutOfRangeException();
         }
-        return default(T);
+
+        for (int i = 0; i < index; i++) {
+            node = node.next;
+        }
+        return node.data;
     }
 
     public Node<T> GetNode(int index) {
@@ -92,7 +90,9 @@ class SinglyLinkedList<T> : ICollection<T> {
     }
 
     public void Clear() {
-        throw new NotImplementedException();
+        for (int i = 0; i < this.Count; i++) {
+            Remove(i);
+        }
     }
 
     public Boolean Contains(T item) {
@@ -105,7 +105,20 @@ class SinglyLinkedList<T> : ICollection<T> {
     }
 
     public void CopyTo(T[] array, Int32 arrayIndex) {
-        throw new NotImplementedException();
+        if (Count == 0 || arrayIndex >= Count) {
+            return;
+        }
+
+        var current = GetNode(arrayIndex);
+
+        int destinationCounter = 0;
+        int arrayLength = array.Length;
+
+        while (current != null && destinationCounter < arrayLength) {
+            array[destinationCounter] = current.data;
+            current = current.next;
+            destinationCounter++;
+        }
     }
 
     public IEnumerator<T> GetEnumerator() {
@@ -116,9 +129,49 @@ class SinglyLinkedList<T> : ICollection<T> {
         }
     }
 
-
     public Boolean Remove(T item) {
-        throw new NotImplementedException();
+        if (this.head == null) {
+            return false;
+        }
+        Node<T> node = head;
+        Node<T> next = node.next;
+        Node<T>? prev;
+        while (next != null) {
+            prev = node;
+            next = node.next;
+            if (EqualityComparer<T>.Default.Equals(node.data, item)) {
+                node = prev;
+                prev.next = node;
+            }
+        }
+
+        return false;
+    }
+
+    public Boolean Remove(int index) {
+        if (index > this.Count || index < 0) {
+            throw new IndexOutOfRangeException();
+        }
+
+        if (this.head == null) {
+            return false;
+        }
+
+        Node<T> tmp = head;
+
+        if (index == 0) {
+            head = tmp.next;
+            return true;
+        }
+
+        for (int count = 0; tmp != null && count < index - 1; count++) {
+            tmp = tmp.next;
+        }
+
+        Node<T> next = tmp.next.next;
+        tmp.next = next;
+
+        return true;
     }
 
     IEnumerator IEnumerable.GetEnumerator() {
