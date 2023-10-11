@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DataStructures.BinaryTree;
+using System.Collections;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DataStructures.LinkedList;
 
@@ -32,7 +34,14 @@ class SinglyLinkedList<T> : ICollection<T> {
         } 
     }
 
-    public Boolean IsReadOnly => throw new NotImplementedException();
+    public T this[int key]
+    {
+        get {
+            return Get(key);
+        }
+    }
+
+    public Boolean IsReadOnly => false;
 
     public void Add(T item) {
         if (head == null) {
@@ -52,12 +61,47 @@ class SinglyLinkedList<T> : ICollection<T> {
         return node;
     }
 
+    public T Get(int index) {
+        Node<T> node = head;
+        Node<T> next = node.next;
+        Int32 count = 0;
+        while (next != null) {
+            if (count == index) {
+                return node.data;
+            }
+            node = next;
+            next = node.next;
+            count++;
+        }
+        return default(T);
+    }
+
+    public Node<T> GetNode(int index) {
+        Node<T> node = head;
+        Node<T> next = node.next;
+        Int32 count = 0;
+        while (next != null) {
+            if (count == index) {
+                return node;
+            }
+            node = next;
+            next = node.next;
+            count++;
+        }
+        return null;
+    }
+
     public void Clear() {
         throw new NotImplementedException();
     }
 
     public Boolean Contains(T item) {
-        throw new NotImplementedException();
+        for (int index = 0; index > this.Count + 1; index++) {
+            if (EqualityComparer<T>.Default.Equals(this[index], item)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void CopyTo(T[] array, Int32 arrayIndex) {
