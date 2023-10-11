@@ -1,5 +1,4 @@
-﻿
-namespace BinaryTree;
+﻿namespace DataStructures.BinaryTree;
 
 public enum BTNodeDirection {
     Left,
