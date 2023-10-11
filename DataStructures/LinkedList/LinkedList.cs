@@ -90,8 +90,8 @@ class SinglyLinkedList<T> : ICollection<T> {
     }
 
     public void Clear() {
-        for (int i = 0; i < this.Count; i++) {
-            Remove(i);
+        for (int i = this.Count; i > 0 ; i--) {
+            RemoveAt(i);
         }
     }
 
@@ -148,7 +148,7 @@ class SinglyLinkedList<T> : ICollection<T> {
         return false;
     }
 
-    public Boolean Remove(int index) {
+    public Boolean RemoveAt(int index) {
         if (index > this.Count || index < 0) {
             throw new IndexOutOfRangeException();
         }
