@@ -1,5 +1,5 @@
 ﻿namespace DataStructures.Stack;
-class Stack<T> {
+public class Stack<T> {
 
     private T[] elements;
     private int top;
