@@ -2,7 +2,7 @@
 
 namespace DataStructures.LinkedList;
 
-class Node<T> {
+public class Node<T> {
     public T? data;
     public Node<T>? next = null;
 
@@ -15,7 +15,7 @@ class Node<T> {
     }
 }
 
-class SinglyLinkedList<T> : ICollection<T> {
+public class SinglyLinkedList<T> : ICollection<T> {
 
     private Node<T> head;
 
